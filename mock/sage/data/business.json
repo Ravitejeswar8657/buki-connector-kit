@@ -1,0 +1,138 @@
+{
+  "_about": "Mock Sage data for running the connector end to end without a Sage login. NOT from Sage and NOT real. Shapes follow Sage's API v3.1 reference, unverified against a real response. GBP business, VAT 20%. Edit this file while the mock runs: that is 'a change made in Sage'. Bump updated_at when you edit a record.",
+  "businesses": [{ "id": "mock-business-0001", "name": "Halden Labs (mock Sage)" }],
+  "financial_settings": {
+    "base_currency": { "id": "GBP", "displayed_as": "Pound Sterling (GBP)" },
+    "multi_currency_enabled": true,
+    "accounts_start_date": "2026-01-01",
+    "year_end_date": "2026-12-31"
+  },
+  "ledger_accounts": [
+    { "id": "la-1100", "name": "Debtors Control Account", "nominal_code": 1100, "ledger_account_group": { "id": "ASSETS" }, "ledger_account_type": { "id": "CURRENT_ASSETS" }, "updated_at": "2026-01-01T09:00:00Z" },
+    { "id": "la-1200", "name": "Bank Current Account", "nominal_code": 1200, "ledger_account_group": { "id": "ASSETS" }, "ledger_account_type": { "id": "BANK" }, "updated_at": "2026-01-01T09:00:00Z" },
+    { "id": "la-1210", "name": "Bank Deposit Account", "nominal_code": 1210, "ledger_account_group": { "id": "ASSETS" }, "ledger_account_type": { "id": "BANK" }, "updated_at": "2026-01-01T09:00:00Z" },
+    { "id": "la-2100", "name": "Creditors Control Account", "nominal_code": 2100, "ledger_account_group": { "id": "LIABILITIES" }, "ledger_account_type": { "id": "CURRENT_LIABILITY" }, "updated_at": "2026-01-01T09:00:00Z" },
+    { "id": "la-2200", "name": "Sales Tax Control Account", "nominal_code": 2200, "ledger_account_group": { "id": "LIABILITIES" }, "ledger_account_type": { "id": "CURRENT_LIABILITY" }, "updated_at": "2026-01-01T09:00:00Z" },
+    { "id": "la-2201", "name": "Purchase Tax Control Account", "nominal_code": 2201, "ledger_account_group": { "id": "LIABILITIES" }, "ledger_account_type": { "id": "CURRENT_LIABILITY" }, "updated_at": "2026-01-01T09:00:00Z" },
+    { "id": "la-3000", "name": "Capital introduced", "nominal_code": 3000, "ledger_account_group": { "id": "EQUITY" }, "ledger_account_type": { "id": "EQUITY" }, "updated_at": "2026-01-01T09:00:00Z" },
+    { "id": "la-4000", "name": "Sales Type A", "nominal_code": 4000, "ledger_account_group": { "id": "INCOME" }, "ledger_account_type": { "id": "SALES" }, "updated_at": "2026-01-01T09:00:00Z" },
+    { "id": "la-4900", "name": "Other income", "nominal_code": 4900, "ledger_account_group": { "id": "INCOME" }, "ledger_account_type": { "id": "OTHER_INCOME" }, "updated_at": "2026-01-01T09:00:00Z" },
+    { "id": "la-7100", "name": "Rent and rates", "nominal_code": 7100, "ledger_account_group": { "id": "EXPENDITURE" }, "ledger_account_type": { "id": "OVERHEADS" }, "updated_at": "2026-01-01T09:00:00Z" },
+    { "id": "la-7500", "name": "Software subscriptions", "nominal_code": 7500, "ledger_account_group": { "id": "EXPENDITURE" }, "ledger_account_type": { "id": "OVERHEADS" }, "updated_at": "2026-01-01T09:00:00Z" },
+    { "id": "la-9998", "name": "Suspense Account", "nominal_code": 9998, "ledger_account_group": { "id": "LIABILITIES" }, "ledger_account_type": { "id": "CURRENT_LIABILITY" }, "updated_at": "2026-01-01T09:00:00Z" }
+  ],
+  "contacts": [
+    { "id": "con-nor", "name": "Northgate Analytics", "reference": "NOR001", "contact_types": [{ "id": "CUSTOMER" }], "email": "accounts@northgate.example", "currency": { "id": "GBP" }, "updated_at": "2026-03-11T15:20:00Z" },
+    { "id": "con-ste", "name": "Steel Fabrications", "reference": "STE001", "contact_types": [{ "id": "CUSTOMER" }], "main_contact_person": { "name": "Jim Thomas", "email": "jim@steelfab.example", "is_main_contact": true }, "currency": { "id": "GBP" }, "updated_at": "2026-04-02T10:00:00Z" },
+    { "id": "con-tol", "name": "Tolliver & Reed LLP", "reference": "TOL001", "contact_types": [{ "id": "CUSTOMER" }], "currency": { "id": "GBP" }, "updated_at": "2026-02-20T08:30:00Z" },
+    { "id": "con-bri", "name": "Brightline Inc", "reference": "BRI001", "contact_types": [{ "id": "CUSTOMER" }], "email": "ap@brightline.example", "currency": { "id": "USD" }, "updated_at": "2026-09-30T12:00:00Z" },
+    { "id": "con-ovl", "name": "Ovelo Cloud", "reference": "OVE001", "contact_types": [{ "id": "VENDOR" }], "email": "billing@ovelo.example", "currency": { "id": "GBP" }, "updated_at": "2026-05-14T09:10:00Z" },
+    { "id": "con-blu", "name": "Bluestem Workspace", "reference": "BLU001", "contact_types": [{ "id": "VENDOR" }], "email": "rent@bluestem.example", "currency": { "id": "GBP" }, "updated_at": "2026-01-03T11:00:00Z" }
+  ],
+  "sales_invoices": [
+    {
+      "id": "si-0001", "invoice_number": "SI-1", "reference": "O/BAL", "notes": "Opening balance migrated", "contact": { "id": "con-tol" },
+      "date": "2025-12-31", "due_date": "2026-01-30", "status": { "id": "UNPAID" }, "currency": { "id": "GBP" },
+      "net_amount": "150.00", "tax_amount": "0.00", "total_amount": "150.00", "outstanding_amount": "150.00",
+      "invoice_lines": [{ "id": "sil-0001", "description": "Opening Balance", "ledger_account": { "id": "la-9998" }, "quantity": "1.0", "unit_price": "150.00", "net_amount": "150.00", "tax_amount": "0.00", "total_amount": "150.00" }],
+      "updated_at": "2026-01-02T09:00:00Z"
+    },
+    {
+      "id": "si-0101", "invoice_number": "SI-101", "contact": { "id": "con-nor" },
+      "date": "2026-09-04", "due_date": "2026-10-04", "status": { "id": "PAID" }, "currency": { "id": "GBP" },
+      "net_amount": "18000.00", "tax_amount": "3600.00", "total_amount": "21600.00", "outstanding_amount": "0.00",
+      "invoice_lines": [{ "id": "sil-0101", "description": "Platform licence, Q3 2026", "ledger_account": { "id": "la-4000" }, "quantity": "1.0", "unit_price": "18000.00", "net_amount": "18000.00", "tax_amount": "3600.00", "total_amount": "21600.00" }],
+      "updated_at": "2026-10-04T16:40:00Z"
+    },
+    {
+      "id": "si-0102", "invoice_number": "SI-102", "contact": { "id": "con-ste" },
+      "date": "2026-09-15", "due_date": "2026-10-15", "status": { "id": "UNPAID" }, "currency": { "id": "GBP" },
+      "net_amount": "9500.00", "tax_amount": "1900.00", "total_amount": "11400.00", "outstanding_amount": "11400.00",
+      "invoice_lines": [{ "id": "sil-0102", "description": "Implementation, September", "ledger_account": { "id": "la-4000" }, "quantity": "1.0", "unit_price": "9500.00", "net_amount": "9500.00", "tax_amount": "1900.00", "total_amount": "11400.00" }],
+      "updated_at": "2026-09-15T10:00:00Z"
+    },
+    {
+      "id": "si-0103", "invoice_number": "SI-103", "contact": { "id": "con-ste" },
+      "date": "2026-10-01", "due_date": "2026-10-31", "status": { "id": "PART_PAID" }, "currency": { "id": "GBP" },
+      "net_amount": "6000.00", "tax_amount": "1200.00", "total_amount": "7200.00", "outstanding_amount": "3000.00",
+      "invoice_lines": [{ "id": "sil-0103", "description": "Support retainer, October", "ledger_account": { "id": "la-4000" }, "quantity": "1.0", "unit_price": "6000.00", "net_amount": "6000.00", "tax_amount": "1200.00", "total_amount": "7200.00" }],
+      "updated_at": "2026-10-25T14:00:00Z"
+    },
+    {
+      "id": "si-0104", "invoice_number": "SI-104", "contact": { "id": "con-nor" },
+      "date": "2026-10-20", "status": { "id": "UNPAID" }, "currency": { "id": "GBP" },
+      "net_amount": "12000.00", "tax_amount": "2400.00", "total_amount": "14400.00", "outstanding_amount": "14400.00",
+      "invoice_lines": [{ "id": "sil-0104", "description": "Analytics add-on, annual", "ledger_account": { "id": "la-4000" }, "quantity": "1.0", "unit_price": "12000.00", "net_amount": "12000.00", "tax_amount": "2400.00", "total_amount": "14400.00" }],
+      "updated_at": "2026-10-20T09:30:00Z"
+    },
+    {
+      "id": "si-0105", "invoice_number": "SI-105", "contact": { "id": "con-tol" },
+      "date": "2026-10-22", "due_date": "2026-11-21", "status": { "id": "DRAFT" }, "currency": { "id": "GBP" },
+      "net_amount": "1000.00", "tax_amount": "200.00", "total_amount": "1200.00", "outstanding_amount": "1200.00",
+      "invoice_lines": [{ "id": "sil-0105", "description": "Workshop (draft)", "ledger_account": { "id": "la-4000" }, "quantity": "1.0", "unit_price": "1000.00", "net_amount": "1000.00", "tax_amount": "200.00", "total_amount": "1200.00" }],
+      "updated_at": "2026-10-22T11:00:00Z"
+    },
+    {
+      "id": "si-0106", "invoice_number": "SI-106", "contact": { "id": "con-ste" },
+      "date": "2026-10-05", "due_date": "2026-11-04", "status": { "id": "VOID" }, "void_reason": "Raised twice", "currency": { "id": "GBP" },
+      "net_amount": "500.00", "tax_amount": "100.00", "total_amount": "600.00", "outstanding_amount": "0.00",
+      "invoice_lines": [{ "id": "sil-0106", "description": "Duplicate of SI-103", "ledger_account": { "id": "la-4000" }, "quantity": "1.0", "unit_price": "500.00", "net_amount": "500.00", "tax_amount": "100.00", "total_amount": "600.00" }],
+      "updated_at": "2026-10-06T08:00:00Z"
+    },
+    {
+      "id": "si-0107", "invoice_number": "SI-107", "contact": { "id": "con-bri" },
+      "date": "2026-10-12", "due_date": "2026-11-11", "status": { "id": "UNPAID" }, "currency": { "id": "USD" }, "exchange_rate": "1.27",
+      "net_amount": "5000.00", "tax_amount": "0.00", "total_amount": "5000.00", "outstanding_amount": "5000.00",
+      "base_currency_total_amount": "3937.01", "base_currency_outstanding_amount": "3937.01",
+      "invoice_lines": [{ "id": "sil-0107", "description": "Data export licence (US, zero-rated)", "ledger_account": { "id": "la-4000" }, "quantity": "1.0", "unit_price": "5000.00", "net_amount": "5000.00", "tax_amount": "0.00", "total_amount": "5000.00" }],
+      "updated_at": "2026-10-12T15:00:00Z"
+    }
+  ],
+  "purchase_invoices": [
+    {
+      "id": "pi-0201", "vendor_reference": "BW-0926", "contact": { "id": "con-blu" },
+      "date": "2026-09-01", "due_date": "2026-09-01", "status": { "id": "PAID" }, "currency": { "id": "GBP" },
+      "net_amount": "8800.00", "tax_amount": "1760.00", "total_amount": "10560.00", "outstanding_amount": "0.00",
+      "invoice_lines": [
+        { "id": "pil-0201a", "description": "Office rent, September", "ledger_account": { "id": "la-7100" }, "net_amount": "8500.00", "tax_amount": "1700.00", "total_amount": "10200.00" },
+        { "id": "pil-0201b", "description": "Meeting room booking software", "ledger_account": { "id": "la-7500" }, "net_amount": "300.00", "tax_amount": "60.00", "total_amount": "360.00" }
+      ],
+      "updated_at": "2026-09-01T12:05:00Z"
+    },
+    {
+      "id": "pi-0202", "vendor_reference": "OV-1043", "contact": { "id": "con-ovl" },
+      "date": "2026-10-03", "due_date": "2026-11-02", "status": { "id": "UNPAID" }, "currency": { "id": "GBP" },
+      "net_amount": "2350.00", "tax_amount": "470.00", "total_amount": "2820.00", "outstanding_amount": "2820.00",
+      "invoice_lines": [
+        { "id": "pil-0202a", "description": "Cloud hosting, October", "ledger_account": { "id": "la-7500" }, "net_amount": "2000.00", "tax_amount": "400.00", "total_amount": "2400.00" },
+        { "id": "pil-0202b", "description": "Support seats x7", "ledger_account": { "id": "la-7500" }, "net_amount": "350.00", "tax_amount": "70.00", "total_amount": "420.00" }
+      ],
+      "updated_at": "2026-10-03T11:00:00Z"
+    },
+    {
+      "id": "pi-0203", "vendor_reference": "BW-1026", "contact": { "id": "con-blu" },
+      "date": "2026-10-01", "due_date": "2026-10-01", "status": { "id": "PAID" }, "currency": { "id": "GBP" },
+      "net_amount": "8500.00", "tax_amount": "1700.00", "total_amount": "10200.00", "outstanding_amount": "0.00",
+      "invoice_lines": [{ "id": "pil-0203", "description": "Office rent, October", "ledger_account": { "id": "la-7100" }, "net_amount": "8500.00", "tax_amount": "1700.00", "total_amount": "10200.00" }],
+      "updated_at": "2026-10-01T12:00:00Z"
+    }
+  ],
+  "bank_accounts": [
+    { "id": "ba-current", "bank_account_details": { "account_name": "Bank Current Account", "account_number": "00000000", "sort_code": "000000" }, "ledger_account": { "id": "la-1200" }, "bank_account_type": { "id": "CHECKING" }, "nominal_code": 1200, "currency": { "id": "GBP" }, "updated_at": "2026-01-01T09:00:00Z" },
+    { "id": "ba-deposit", "bank_account_details": { "account_name": "Bank Deposit Account", "account_number": "00000001", "sort_code": "000000" }, "ledger_account": { "id": "la-1210" }, "bank_account_type": { "id": "SAVINGS" }, "nominal_code": 1210, "currency": { "id": "GBP" }, "updated_at": "2026-01-01T09:00:00Z" }
+  ],
+  "contact_payments": [
+    { "id": "cp-0301", "transaction_type": { "id": "VENDOR_PAYMENT" }, "contact": { "id": "con-blu", "displayed_as": "Bluestem Workspace (BLU001)" }, "bank_account": { "id": "ba-current" }, "date": "2026-09-01", "reference": "BW-0926", "total_amount": "10560.00", "currency": { "id": "GBP" }, "allocated_artefacts": [{ "artefact": { "id": "pi-0201" }, "amount": "10560.00" }], "updated_at": "2026-09-01T12:05:00Z" },
+    { "id": "cp-0302", "transaction_type": { "id": "VENDOR_PAYMENT" }, "contact": { "id": "con-blu", "displayed_as": "Bluestem Workspace (BLU001)" }, "bank_account": { "id": "ba-current" }, "date": "2026-10-01", "reference": "BW-1026", "total_amount": "10200.00", "currency": { "id": "GBP" }, "allocated_artefacts": [{ "artefact": { "id": "pi-0203" }, "amount": "10200.00" }], "updated_at": "2026-10-01T12:00:00Z" },
+    { "id": "cp-0303", "transaction_type": { "id": "CUSTOMER_RECEIPT" }, "contact": { "id": "con-nor", "displayed_as": "Northgate Analytics (NOR001)" }, "bank_account": { "id": "ba-current" }, "date": "2026-10-04", "reference": "SI-101", "total_amount": "21600.00", "currency": { "id": "GBP" }, "allocated_artefacts": [{ "artefact": { "id": "si-0101" }, "amount": "21600.00" }], "updated_at": "2026-10-04T16:40:00Z" },
+    { "id": "cp-0304", "transaction_type": { "id": "CUSTOMER_RECEIPT" }, "contact": { "id": "con-ste", "displayed_as": "Steel Fabrications (STE001)" }, "bank_account": { "id": "ba-current" }, "date": "2026-10-25", "reference": "SI-103 part", "total_amount": "4200.00", "currency": { "id": "GBP" }, "allocated_artefacts": [{ "artefact": { "id": "si-0103" }, "amount": "4200.00" }], "updated_at": "2026-10-25T14:00:00Z" }
+  ],
+  "other_payments": [
+    { "id": "op-0401", "transaction_type": { "id": "OTHER_RECEIPT" }, "bank_account": { "id": "ba-current" }, "date": "2026-01-02", "reference": "CAPITAL", "total_amount": "100000.00", "net_amount": "100000.00", "tax_amount": "0.00", "payment_lines": [{ "details": "Share capital paid in", "ledger_account": { "id": "la-3000" }, "net_amount": "100000.00", "tax_amount": "0.00", "total_amount": "100000.00" }], "updated_at": "2026-01-02T09:00:00Z" },
+    { "id": "op-0402", "transaction_type": { "id": "OTHER_PAYMENT" }, "bank_account": { "id": "ba-current" }, "date": "2026-10-09", "reference": "CARD", "total_amount": "60.00", "net_amount": "50.00", "tax_amount": "10.00", "payment_lines": [{ "details": "Figma seat, card", "ledger_account": { "id": "la-7500" }, "net_amount": "50.00", "tax_amount": "10.00", "total_amount": "60.00" }], "updated_at": "2026-10-09T13:00:00Z" },
+    { "id": "op-0403", "transaction_type": { "id": "OTHER_RECEIPT" }, "bank_account": { "id": "ba-deposit" }, "date": "2026-10-31", "reference": "INT", "total_amount": "12.40", "payment_lines": [{ "details": "Bank interest", "ledger_account": { "id": "la-4900" }, "net_amount": "12.40", "tax_amount": "0.00", "total_amount": "12.40" }], "updated_at": "2026-10-31T23:00:00Z" }
+  ],
+  "bank_transfers": [
+    { "id": "tr-0501", "from_bank_account": { "id": "ba-current" }, "to_bank_account": { "id": "ba-deposit" }, "date": "2026-09-20", "reference": "TRF", "description": "Move to deposit", "amount": "60000.00", "updated_at": "2026-09-20T10:00:00Z" }
+  ]
+}

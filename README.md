@@ -4,6 +4,59 @@ Buki answers questions about a company (briefs) and shows its data in modules. E
 
 It is for the **Bring Sage into Buki** evaluation. It is not the product and it is not production code. The sample company, **Halden Labs**, is made up, and nothing in this repository is real company data.
 
+## The Sage connector
+
+This repository adds a Sage Accounting connector in `src/data/canonical/sage/`. It keeps Sage's ledger accounts, contacts, sales and purchase invoices, and cash movements (contact payments, other payments, bank transfers) synced into the canonical finance records, so `ask` and `show -- finance` answer from Sage.
+
+**Status, plainly:** built, with 92 passing tests, and run end to end against a local stand-in for Sage (`mock/sage`). It has **not yet run against a real Sage business**: logging in to the trial fails on Sage's side with `error-id-provider`. Field names come from Sage's API reference and are marked `UNVERIFIED` in `sage/raw/types.ts` until a real response confirms them. `SUBMISSION_NOTE.md` says what was pulled, what was left out, and what is unfinished.
+
+### Against your Sage trial
+
+1. Create the trial business and the developer app (see [Getting a Sage business to work against](#getting-a-sage-business-to-work-against)). Use `http://localhost:3000/api/sage/callback` as the callback URL.
+2. In `.env`, set `SAGE_CLIENT_ID`, `SAGE_CLIENT_SECRET` and `SAGE_CALLBACK_URL`.
+3. `npm run sage:auth`. Sign in as a **user of the trial business**. The tokens are saved to `.data/sage-tokens.json` (gitignored), and the script prints the businesses that user can see.
+4. In `.env`, set `SAGE_BUSINESS_ID` to the id it printed, and `FINANCE_SOURCE=sage`.
+5. Then:
+
+```
+npm run health                     # finance  sage  ok  Sage business "...", base currency GBP
+npm run sync
+npm run ask -- "who owes us money"
+npm run ask -- "what did we spend on software last month"
+npm run show -- finance
+npm run cron                       # syncs every SYNC_INTERVAL_SECONDS
+```
+
+If `health` or `sync` reports `auth: Could not refresh the Sage token`, run `npm run sage:auth` again.
+
+### Against the local stand-in (no Sage account needed)
+
+`mock/sage` is a small server that answers like Sage's API and OAuth endpoints, with a made-up GBP business that has VAT, a USD invoice, an opening balance, a draft, a void and an invoice with no due date. **It is not Sage.** It shows the connector's plumbing works, not that Sage answers this way. Its data file, `mock/sage/data/business.json`, is re-read on every request, so editing it while `cron` runs is "a change made in Sage".
+
+Put these in `.env` (the values are the stand-in's, not secrets):
+
+```
+FINANCE_SOURCE=sage
+SAGE_CLIENT_ID=mock-client-id
+SAGE_CLIENT_SECRET=mock-client-secret
+SAGE_CALLBACK_URL=http://localhost:3000/api/sage/callback
+SAGE_BUSINESS_ID=mock-business-0001
+SAGE_API_BASE_URL=http://localhost:4020/v3.1/
+SAGE_AUTHORIZE_URL=http://localhost:4020/oauth2/auth
+SAGE_TOKEN_URL=http://localhost:4020/token
+```
+
+Then `npm run mock:sage` in one terminal (`MOCK_SAGE_PAGE_SIZE=2 npm run mock:sage` to see paging), and `npm run sage:auth` in another (the stand-in signs you in at once), then the commands above. Asked in November 2026:
+
+| Ask | Expect |
+| --- | --- |
+| `who owes us money` | 4 overdue invoices, GBP 14,550 and $5,000 (two currencies, not converted); 1 open invoice has no due date and is not counted |
+| `what did we spend on software last month` | GBP 2,350 on Software subscriptions in October 2026, from 2 purchase invoice lines (net of VAT) |
+
+To see a failed sync keep the previous records, switch the stand-in with `curl -X POST "http://localhost:4020/__mock/mode?set=error500"` (or `html`, `slow`, `ratelimit`, and `ok` to go back), or stop it. `curl -X POST http://localhost:4020/__mock/expire` revokes every access token, forcing one refresh.
+
+To go back to real Sage, remove the three `*_URL` lines and the stand-in's values, and delete `.data/sage-tokens.json`.
+
 ## Quick start
 
 You need **Node 22**. Then:
@@ -22,6 +75,8 @@ Every command:
 | Command | What it does |
 | --- | --- |
 | `npm run mock` | The mock BambooHR on port 4010 |
+| `npm run mock:sage` | The local stand-in for Sage on port 4020 (not Sage; see [The Sage connector](#the-sage-connector)) |
+| `npm run sage:auth` | The one-time Sage sign-in: stores tokens under `.data/` and prints your business ids. `-- --no-browser` prints the link instead of opening it |
 | `npm run health` | Each configured provider's `health()` and what the store last synced |
 | `npm run sync` | One sync of every configured domain, one line per run, exit 1 if a run failed |
 | `npm run cron` | The same on a loop, every `SYNC_INTERVAL_SECONDS` (300 by default, 5 at least) |

@@ -8,12 +8,14 @@
   },
   "scripts": {
     "mock": "node mock/bamboohr/server.mjs",
+    "mock:sage": "node mock/sage/server.mjs",
     "health": "tsx src/cli.ts health",
     "sync": "tsx src/cli.ts sync",
     "cron": "tsx src/cli.ts cron",
     "show": "tsx src/cli.ts show",
     "ask": "tsx src/cli.ts ask",
     "check": "tsx src/cli.ts check",
+    "sage:auth": "tsx src/sage-auth.ts",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
